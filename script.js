@@ -10,15 +10,16 @@ let amount2;
 let mission = 500000;
 let accumulatedMonth;
 let budgetDay;
-let sum = 0, i =  0;
 let whatGetTargetMonth;
+let res = 0;
+let sum = 0;
 // Объявим все переменные
 
 
 function start() {
     do {
         money = prompt('Какой твой месячный доход?');
-    } while(isNaN(money) || money.trim() === '' || money === null)    
+    } while(isNaN(money) || money.trim() === '' || money === null);    
 };
 
 start();
@@ -34,6 +35,7 @@ deposit = confirm('У тебя есть депозит в банке? Нажми
 // ---------------Урок 5, перепишем некоторые функции, используя циклы------------------------------
 
 function getExpensesMonth() {
+    let i =  0;
     do{
         if (i === 0){
             expenses1 = prompt('Назови обязательную статью расходов.');
@@ -43,26 +45,25 @@ function getExpensesMonth() {
         // Запрашиваем у пользователья его обязательные и прочие расходы
 
         do {
-            sum += +prompt('Во сколько это обойдется?');
-            // sum = Number(sum);
-            i++;
+            sum = +prompt('Во сколько это обойдется?');
+
         } while (isNaN(sum) || sum === '' || sum === null);
         // Спрашиваем траты у пользователя
+        res = res + sum;
+        i++;
+        
+    } while (i < 2);
 
-    } while (i < 1);
-
-
-
-    return sum;
+    return res;
 };
 getExpensesMonth();
 // Вызываем функцию getExpensesMonth, передаем ей значения трат за месяц, полученные у пользователя.
 
 
-function getAccumulatedMonth(money, sum) {
+function getAccumulatedMonth(money, res) {
     return money - sum;
 };
-accumulatedMonth = getAccumulatedMonth(money, sum);
+accumulatedMonth = getAccumulatedMonth(money, res);
 // Объявляем функцию, передаем ей параметры, необходимые для вычесления накоплений за месяц,
 // вызов функции присваеваем в переменную accumulatedMonth.
 // Внесены коррективы: теперь значение вычесляется исходя из переменной sum,
@@ -120,7 +121,7 @@ if (whatGetTargetMonth > 0) {
 console.log('Бюджет на день: ', budgetDay);
 // Бюджет на день
 
-console.log('Расходы на месяц составили: ' + getExpensesMonth());
+console.log('Расходы на месяц составили: ' + res);
 // Расходы за месяц
 // При вывове функции не передаем значения amount1 and amount2, так как все необходимые
 // данные и вычесление происходят в функции getExpensesMonth.
